@@ -1,8 +1,9 @@
 package token
 
-import (
-	"fmt"
-)
+var keywords = map[string]TokenType{
+	"fn":  FUNCTION,
+	"let": LET,
+}
 
 const (
 	ILLEGAL = "ILLEGAL"
@@ -36,6 +37,9 @@ type Token struct {
 	Literal string
 }
 
-func main() {
-	fmt.Println("vim-go")
+func LookupIdent(ident string) TokenType {
+	if tok, ok := keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
 }
